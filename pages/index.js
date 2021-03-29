@@ -49,9 +49,9 @@ export default function Home() {
         </p>
 
         <div className={styles.grid}>
-          {data.map(article => {
+          {data.map((article) => {
             return (
-              <a target="_blank" href={article.link} className={styles.card}>
+              <a target="_blank" href={article.link} className={styles.card} key={article.link}>
                 <h3>{article.title}</h3>
                 <p>Find in-depth information about Next.js features and API.</p>
                 <div style={{

@@ -35,17 +35,6 @@
   align-items: center;
 }
 
-.title a {
-  color: #0070f3;
-  text-decoration: none;
-}
-
-.title a:hover,
-.title a:focus,
-.title a:active {
-  text-decoration: underline;
-}
-
 .title {
   margin: 0;
   line-height: 1.15;
@@ -65,8 +54,8 @@
 .code {
   background: #fafafa;
   border-radius: 5px;
-  padding: 0.75rem;
-  font-size: 1.1rem;
+  padding: 0.5rem 0.75rem;
+  font-size: 1rem;
   font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
     Bitstream Vera Sans Mono, Courier New, monospace;
 }
@@ -77,7 +66,7 @@
   justify-content: center;
   flex-wrap: wrap;
   max-width: 800px;
-  margin-top: 3rem;
+  margin-top: 2rem;
 }
 
 .card {
@@ -115,8 +104,27 @@
 }
 
 @media (max-width: 600px) {
+  .main {
+    padding: 2rem 0;
+  }
+
+  .title {
+    margin: 0;
+    line-height: 1.15;
+    font-size: 1.5rem;
+  }
+
+  .description {
+    font-size: 1rem;
+  }
+
+  .code {
+    padding: 0.5rem;
+  }
+
   .grid {
     width: 100%;
     flex-direction: column;
+    margin-top: 1rem;
   }
 }
