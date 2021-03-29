@@ -36,6 +36,7 @@ export default function Home() {
       <Head>
         <title>Unifeeds</title>
         <link rel="icon" href="/favicon.ico" />
+        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"></meta>
       </Head>
 
       <main className={styles.main}>
