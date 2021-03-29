@@ -16,7 +16,7 @@ export default function Home() {
   useEffect(() => {
     (async () => {
       try {
-        const { items } = await parser.parseURL('http://rss.cnn.com/rss/cnn_topstories.rss');
+        const { items } = await parser.parseURL('https://rss.nytimes.com/services/xml/rss/nyt/Jobs.xml');
         setData(items.slice(0, 10))
       } catch (e) {
         setError("Error! Fetching feeds..")
