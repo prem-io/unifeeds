@@ -1,15 +1,10 @@
 import Head from 'next/head'
 import { useEffect, useState } from 'react'
 import styles from '../styles/Home.module.css'
+import { HTMLParser } from '../utils/helper';
 
 const Parser = require('rss-parser');
 const RSSParser = new Parser();
-
-function HTMLParser(htmlString) {
-  const parser = new DOMParser()
-  const parsedDocument = parser.parseFromString(htmlString, "text/html")
-  return parsedDocument.querySelector("img") ? parsedDocument.querySelector("img").getAttribute('src') : null
-}
 
 export default function Home() {
   const [data, setData] = useState([])
@@ -67,6 +62,7 @@ export default function Home() {
           {data.map((article) => {
             return (
               <a target="_blank" href={article.link} className={styles.card} key={article.link}>
+                <img className={styles.image} src={article.img_url} alt="feed-image" />
                 <h3>{article.title}</h3>
                 <p>Find in-depth information about Next.js features and API.</p>
                 <div style={{
