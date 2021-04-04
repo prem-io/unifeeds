@@ -8,18 +8,23 @@
     "start": "next start"
   },
   "dependencies": {
-    "next": "10.0.5",
-    "react": "17.0.1",
-    "react-dom": "17.0.1",
     "autoprefixer": "^10.1.0",
+    "axios": "^0.21.1",
     "dotenv": "^8.2.0",
     "lodash": "^4.17.20",
     "micro-cors": "^0.1.1",
+    "next": "10.0.5",
     "next-http-proxy-middleware": "^1.0.9",
     "postcss": "^8.1.7",
-    "react-js-pagination": "^3.0.3",
+    "react": "17.0.1",
+    "react-dom": "17.0.1",
     "rss-parser": "^3.10.0",
     "string-strip-html": "^7.0.3",
-    "uuid": "^8.3.2"
+    "uuid": "^8.3.2",
+    "xml-js": "^1.6.11"
+  },
+  "devDependencies": {
+    "react-xml-parser": "^1.1.8",
+    "rss-to-json": "^1.1.3"
   }
 }

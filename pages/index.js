@@ -3,10 +3,13 @@ import { useEffect, useState } from 'react'
 import styles from '../styles/Home.module.css'
 
 const Parser = require('rss-parser');
-const parser = new Parser();
+const RSSParser = new Parser();
 
-// 'http://rss.cnn.com/rss/cnn_topstories.rss'
-// 'https://rss.nytimes.com/services/xml/rss/nyt/Jobs.xml'
+function HTMLParser(htmlString) {
+  const parser = new DOMParser()
+  const parsedDocument = parser.parseFromString(htmlString, "text/html")
+  return parsedDocument.querySelector("img") ? parsedDocument.querySelector("img").getAttribute('src') : null
+}
 
 export default function Home() {
   const [data, setData] = useState([])
@@ -16,9 +19,23 @@ export default function Home() {
   useEffect(() => {
     (async () => {
       try {
-        const { items } = await parser.parseURL('https://rss.nytimes.com/services/xml/rss/nyt/Jobs.xml');
-        setData(items.slice(0, 10))
+        const { items } = await RSSParser.parseURL('https://medium.com/feed/topic/javascript');
+
+        const data = items.map(item => {
+          return {
+            title: item.title,
+            link: item.link,
+            published_at: item.pubDate,
+            uid: item.guid,
+            author: item.creator,
+            categories: item.categories,
+            img_url: HTMLParser(item.content)
+          }
+        })
+
+        setData(data)
       } catch (e) {
+        console.log(e);
         setError("Error! Fetching feeds..")
       }
     })();
@@ -29,14 +46,12 @@ export default function Home() {
 
   if (error) return <div>{error}</div>
 
-  console.log(data);
-
   return (
     <div className={styles.container}>
       <Head>
         <title>Unifeeds</title>
         <link rel="icon" href="/favicon.ico" />
-        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"></meta>
+        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
       </Head>
 
       <main className={styles.main}>
@@ -77,3 +92,36 @@ export default function Home() {
     </div>
   )
 }
+
+
+// var XMLParser = require('react-xml-parser');
+// var xml = new XMLParser().parseFromString(data);  // Assume xmlText contains the example XML
+// console.log(xml);
+// console.log(xml.getElementsByTagName('item'));
+
+{/* <div class="medium-feed-item">
+  <p class="medium-feed-image">
+    <a href="https://medium.com/mobis3c/exploiting-android-webview-vulnerabilities-e2bcff780892?source=rss-------8-----------------javascript">
+    <img src="https://cdn-images-1.medium.com/max/1217/1*eQE5lyBsWVyCRy2uIg6AHA.png" width="1217"/>
+    </a>
+  </p>
+  <p class="medium-feed-snippet">What is WebView?</p>
+  <p class="medium-feed-link">
+    <a href="https://medium.com/mobis3c/exploiting-android-webview-vulnerabilities-e2bcff780892?source=rss-------8-----------------javascript">
+      Continue reading on Mobis3c »
+    </a>
+  </p>
+</div> */}
+
+// var convert = require('xml-js');
+
+// const { data } = await axios.get('https://medium.com/feed/topic/javascript')
+// domParser(data)
+// var result1 = convert.xml2json(data, { compact: true, spaces: 4 });
+// console.log(result1);
+
+/** Works */
+// var XMLParser = require('react-xml-parser');
+// var xml = new XMLParser().parseFromString(data);  // Assume xmlText contains the example XML
+// console.log(xml);
+// console.log(xml.getElementsByTagName('item'));
